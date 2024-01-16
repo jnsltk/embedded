@@ -28,7 +28,7 @@ int main(const int argc, const char *argv[]){
         );
 
         // Returns success if the argument is "-h", otherwise return failure as the program is not used correctly
-        return isHelp ? 0 : 1;
+        return 0;
     }
 
     printf("Hello World - I'm %s! \n", argv[1]);
