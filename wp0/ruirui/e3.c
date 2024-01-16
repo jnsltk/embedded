@@ -3,6 +3,7 @@
 // Exercise 3
 // Submission code: 
 #include <stdio.h>
+#include <string.h>
 
 int main(int argc, char *argv[]){
     if(argc == 1){
@@ -10,7 +11,7 @@ int main(int argc, char *argv[]){
     } else if(argc > 2){
         printf("Too many arguments provided! \n");
     }
-    const int bigEnoughFirstArg = (argc >= 2 && sizeof(&argv[1]) / sizeof(char) >= 2);
+    const int bigEnoughFirstArg = (argc >= 2 && strlen(argv[1]) >= 2);
     const int isHelp = (bigEnoughFirstArg && argv[1][0] == '-' && argv[1][1] == 'h'); 
     if(argc != 2 || isHelp){
         printf(
