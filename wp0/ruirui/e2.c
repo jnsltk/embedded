@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 // Main function in the program
-int main(int argc, char *argv[]){
+int main(const int argc, const char *argv[]){
     // Prints "Hello World - I'm <argument>! \n" to the console
     printf("Hello World - I'm %s! \n", argv[1]);
 }

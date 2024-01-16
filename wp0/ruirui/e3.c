@@ -9,7 +9,7 @@
 #include <string.h>
 
 // Entry point of the program
-int main(int argc, char *argv[]){
+int main(const int argc, const char *argv[]){
     if(argc == 1){ // No argument provided
         printf("No argument provided! \n");
     } else if(argc > 2){ // Too many arguments provided
