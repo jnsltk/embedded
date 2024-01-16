@@ -27,7 +27,7 @@ int main(const int argc, const char *argv[]){
             argv[0]
         );
 
-        // Return success if the argument is "-h", otherwise return failure as the program is not used correctly
+        // Returns success if the argument is "-h", otherwise return failure as the program is not used correctly
         return isHelp ? 0 : 1;
     }
 

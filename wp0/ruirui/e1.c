@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 // Main function in the program, no program arguments supported
-int main(const int argc, const char *argv[]){
-    // Print a string to the console
+int main(void){
+    // Prints a string to the console
     printf("%s", "Hello World! \n");
 }
