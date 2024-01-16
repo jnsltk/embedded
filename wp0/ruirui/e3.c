@@ -10,8 +10,8 @@ int main(int argc, char *argv[]){
     } else if(argc > 2){
         printf("Too many arguments provided! \n");
     }
-    int bigEnoughFirstArg = (argc >= 2 && sizeof(&argv[1]) / sizeof(char) >= 2);
-    int isHelp = (bigEnoughFirstArg && argv[1][0] == '-' && argv[1][1] == 'h'); 
+    const int bigEnoughFirstArg = (argc >= 2 && sizeof(&argv[1]) / sizeof(char) >= 2);
+    const int isHelp = (bigEnoughFirstArg && argv[1][0] == '-' && argv[1][1] == 'h'); 
     if(argc != 2 || isHelp){
         printf(
             "Example usage: %s %s\nTo get help: %s -h\n", 
