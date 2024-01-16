@@ -2,6 +2,8 @@
 // Work package 0
 // Exercise 2
 // Submission code: 
+
+// Includes the standard input/output library
 #include <stdio.h>
 
 // Main function in the program

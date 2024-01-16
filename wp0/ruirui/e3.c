@@ -2,7 +2,10 @@
 // Work package 0
 // Exercise 3
 // Submission code: 
+
+// Includes the standard input/output library
 #include <stdio.h>
+// Includes the string library
 #include <string.h>
 
 // Entry point of the program
