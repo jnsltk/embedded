@@ -15,7 +15,7 @@
 // main function in the program
 int main(int argc, char *argv[])
 {
-    if (argv[1] != NULL && strcmp("-h", argv[1]) == 0) // If the user provides the first argument "-h", the program will provide the info how to use it.
+    if (argc > 1 && strcmp("-h", argv[1]) == 0) // If the user provides the first argument "-h", the program will provide the info how to use it.
     {
         printf("You can use this program by following the instructions as below:\nProvide a name after the the file name.");
     }
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     }
     else // if the user provides one argument, he/she will receive a greeting message with his/her name.
     {
-        printf("Hello World!  I'm %s!", argv[1]);
+        printf("Hello World! - I'm %s!", argv[1]);
     }
 
     // exit the program
