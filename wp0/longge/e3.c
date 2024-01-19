@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
     if (argc == 1) 
     {
         printf("No argument provided!\n");
-    // Else check if there are too many arguments provided (more than one)
     }
+    // Else check if there are too many arguments provided (more than one)
     else if (argc > 2) 
     {
         printf("Too many arguments provided\n");
@@ -26,8 +26,8 @@ int main(int argc, char *argv[])
     if (argc != 2 || strcmp(argv[1], "-h") == 0) 
     {
         printf("Usage:\n %s [name]\n %s [-h] -- Show this help message\n", argv[0], argv[0]);
-    // If there is an argument, and it's not -h, print it together with greeting
     }
+    // If there is an argument, and it's not -h, print it together with greeting
     else 
     {
         printf("Hello World! - I'm %s!\n", argv[1]);
