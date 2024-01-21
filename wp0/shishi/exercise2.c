@@ -10,7 +10,7 @@
 // main function in the program
 int main(int argc, char *argv[])
 {
-    printf("Hello World!  I'm %s!", argv[1]);
+    printf("Hello World! - I'm %s!", argv[1]);
 
     // exit the program
     return 0;
