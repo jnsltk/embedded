@@ -6,13 +6,8 @@
     "Spirit of God was hovering over the waters."
 #define s2 "And God said, \" Let there be light, \" and there was light."
 #define s3 "God saw that the light was good, and he separated the light from the darkness."
-#define
+#define s4                                                                                         \
+    "God called the light \"day,\" and the darkness he called \"night.\" And there was evening, "  \
+    "and there was morning—the first day."
 
-const char **sentences = {
-    , "God called the light \"day,\" and the darkness he called \"night.\" And there was evening, "
-      "and there was morning—the first day."};
-
-int main() {
-    printf("%s", sentences[2]);
-    return 0;
-}
+int main() { const int alternative return 0; }
