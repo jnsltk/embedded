@@ -5,8 +5,8 @@
 #define HIGHEST_NUMBER 100   // defines highest number that can be generated
 #define MAX_NUMBER     6     // defines max number of guesses
 
-void doRound();   // declares function which contains the code to perform a round
-int getGuess();   // declares function which reads a number in range from sdin
+void doRound();    // declares function which contains the code to perform a round
+int getNumber();   // declares function which reads a number in range from sdin
 
 // defines main function which is the start point of the program
 int main(const int argc, const char **argv) {
@@ -24,7 +24,7 @@ int main(const int argc, const char **argv) {
 void doRound() {
     // creates the number for the user to guess, randomly, within the range 1 to HIGHEST_NUMBER
     const int num = rand() % HIGHEST_NUMBER + 1;
-    int guess = getGuess();   // gets a valid guess from the user
+    int guess = getNumber();   // gets a valid guess from the user
     int guessAmt = 1;   // initialises variable representing amount of guesses the user has made
 
     while (guess != num) {   // while the user has not guessed right
@@ -37,26 +37,26 @@ void doRound() {
             printf("You ran out of guesses so you lost\n");
             return;   // quits function
         }
-        guess = getGuess();   // gets a valid guess from the user
-        guessAmt++;           // increment amount of guesses
+        guess = getNumber();   // gets a valid guess from the user
+        guessAmt++;            // increment amount of guesses
     }
 
     printf("You have guessed %d times and your guess is correct\n", guessAmt);
 }
 
-char guessStr[11];   // reserves char array used to temporarily store the string the user enters
-int getGuess() {     // defines function which reads a number in range from sdin
+char inputStr[11];   // reserves char array used to temporarily store the string the user enters
+int getNumber() {    // defines function which reads a number in range from sdin
     printf("Enter a number between 1 and %d: ", HIGHEST_NUMBER);
-    fgets(guessStr, sizeof(guessStr), stdin);   // reads a string from stdin with
+    fgets(inputStr, sizeof(inputStr), stdin);   // reads a string from stdin with
 
     char *endptr;   // defines pointer wich will point to where the first argument stopped parsing
-    const long guessInt = strtol(guessStr, &endptr, 10);   // gets long version of first argument
+    const long guessInt = strtol(inputStr, &endptr, 10);   // gets long version of first argument
 
     // if the number is valid
     if (*endptr == '\n' && guessInt > 0 && guessInt <= HIGHEST_NUMBER)
         return guessInt;   // return entered argument as a number
     else {                 // if the number is not valid
         printf("Invalid number, please try again\n");
-        return getGuess();   // call the function again to allow the user to retry
+        return getNumber();   // call the function again to allow the user to retry
     }
 }
