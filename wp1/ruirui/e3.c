@@ -17,7 +17,7 @@ int main(const int argc, const char **argv) {
         doRound();   // performs game one round
         printf("Do you want to play again? (y/n): ");
         // while the stdin reads 'y' (the second getchar() clears the newline character)
-    } while (getchar() == 'y' && getchar());
+    } while (getchar() == 'y' && getchar() == '\n');
 }
 
 // defines function which contains the code to perform a round

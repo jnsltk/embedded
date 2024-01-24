@@ -1,25 +1,34 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>   // includes time header for time function
+#include <stdio.h>    // includes standard I/O library
+#include <stdlib.h>   // includes library for strtol
+#include <time.h>     // includes time header for time function
 
-#define MAX       100   // Defines the maximum number of the values in the table
-#define MAXNUMBER 20    // Defines the maximum value of random numbers
+/* ========================= DEFINES ======================== */
 
-// ------ Function declarations   ----------
+#define DEFAULT_MAX        100   // Defines the maximum number of the values in the table
+#define DEFAULT_MAX_NUMBER 20    // Defines the maximum value of random numbers
+
+/* ======================== VARIABLES ======================= */
+
+unsigned int tableSize = DEFAULT_MAX;   //
+unsigned int maxNumber = DEFAULT_MAX_NUMBER;
+
+/* ================== FUNCTION DECLARATIONS ================= */
+
+char loadParams(const int argc, char **argv);
 
 // This function generates a set of random numbers
 // and fills the table *tab with these numbers
-void create_random(int *tab, const int tabSize, const int maxNumber);
+void create_random(int *tab);
 
 // This function takes the *tab of random numbers
 // and creates a table with the frequency counts for these numbers
-void count_frequency(int *tab, int *freq, const int tabSize);
+void count_frequency(int *tab, int *freq);
 
 // This function takes the frequency count table
 // and draws a histogram of the values in that frequency table
-void draw_histogram(int *freq, const int freqSize);
+void draw_histogram(int *freq);
 
-// ------ Function definitions   ----------
+/* ================== FUNCTION DEFINITIONS ================== */
 
 // ------ Main   --------------------------
 
@@ -27,31 +36,9 @@ void draw_histogram(int *freq, const int freqSize);
 //
 // If you choose to go for the optional part
 // Please modify it accordingly
-int main(int argc, char **argv) {
-    // defines pointer wich will point to where the first argument stopped parsing
-    char *endptr;
-    int tableSize = MAX;
-    int maxNumber = MAXNUMBER;
-
-    if (argc > 1) {
-        // gets long version of first argument
-        tableSize = strtol(argv[1], &endptr, 10);
-
-        if (*endptr != '\0') {
-            printf("First argument is invalid\n");
-            return 0;
-        }
-
-        if (argc > 2) {
-            // gets long version of first argument
-            maxNumber = strtol(argv[2], &endptr, 10);
-
-            if (*endptr != '\0') {
-                printf("Second argument is invalid\n");
-                return 0;
-            }
-        }
-    }
+int main(const int argc, char **argv) {
+    if (!loadParams(argc, argv))
+        return 0;
 
     int table[tableSize];
     int frequency[maxNumber + 1];
@@ -60,29 +47,63 @@ int main(int argc, char **argv) {
         frequency[i] = 0;
     }
 
-    create_random(table, tableSize, maxNumber);
+    create_random(table);
 
-    count_frequency(table, frequency, tableSize);
+    count_frequency(table, frequency);
 
-    draw_histogram(frequency, maxNumber + 1);
+    draw_histogram(frequency);
 }
 
-void create_random(int *tab, const int tabSize, const int maxNumber) {
+char loadParams(const int argc, char **argv) {
+    char *endptr;
+
+    if (argc < 2)
+        return 1;
+
+    // gets long version of first argument
+    tableSize = strtol(argv[1], &endptr, 10);
+
+    if (*endptr != '\0') {
+        printf("First argument is invalid\n");
+        return 0;
+    }
+
+    if (argc < 3)
+        return 1;
+
+    // gets long version of second argument
+    maxNumber = strtol(argv[2], &endptr, 10);
+
+    if (*endptr != '\0') {
+        printf("Second argument is invalid\n");
+        return 0;
+    }
+
+    return 1;
+}
+
+// This function generates a set of random numbers
+// and fills the table *tab with these numbers
+void create_random(int *tab) {
     srand(time(NULL));
 
-    for (int i = 0; i < tabSize; i++) {
-        tab[i] = rand() % (maxNumber + 1);   // TODO: check
+    for (int i = 0; i < tableSize; i++) {
+        tab[i] = rand() % (maxNumber + 1);
     }
 }
 
-void count_frequency(int *tab, int *freq, const int tabSize) {
-    for (int i = 0; i < tabSize; i++) {
+// This function takes the *tab of random numbers
+// and creates a table with the frequency counts for these numbers
+void count_frequency(int *tab, int *freq) {
+    for (int i = 0; i < tableSize; i++) {
         freq[tab[i]]++;
     }
 }
 
-void draw_histogram(int *freq, const int freqSize) {
-    for (int i = 0; i < freqSize; i++) {
+// This function takes the frequency count table
+// and draws a histogram of the values in that frequency table
+void draw_histogram(int *freq) {
+    for (int i = 0; i <= maxNumber; i++) {
         const int num = freq[i];
         if (num) {
             if (i > 99)
