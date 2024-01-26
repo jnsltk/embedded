@@ -32,7 +32,7 @@ void play_round() {
     printf("I\'ve thought of a number, take a guess between 0 and %d\n", HIGHEST_NUM);
     int guess;
     get_guess(&guess);
-    int guess_left = MAX_NUMBER - 1;
+    int guess_left = MAX_NUMBER;
 
     while (guess != n) {
         if (guess_left == 0) {
