@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>   // includes stdlib for
 
-char getNumber(unsigned long *output);
+char getNumber(char *inputStr, unsigned long *output);
 void printAsBin(unsigned long *input, unsigned char size);
 
 int main(const int argc, char **argv) {
@@ -12,41 +12,45 @@ int main(const int argc, char **argv) {
         return 0;
     }
 
-    unsigned long input;
-    if (!getNumber(&input)) {
-        fprintf(stderr, "Invalid number\n");
+    unsigned long num;
+    char didParseNum;
+
+    if (argc > 1)
+        didParseNum = getNumber(argv[1], &num);
+    else {
+        char input[30];
+        fgets(input, sizeof(input), stdin);   // reads a string from stdin with
+        didParseNum = getNumber(input, &num);
+    }
+
+    if (!didParseNum) {
+        printf("Invalid number\n");
         return 2;
     }
 
-    if (input <= UCHAR_MAX) {
-        unsigned char inputChar = input;
+    if (num <= UCHAR_MAX) {
+        unsigned char inputChar = num;
         printAsBin(((unsigned long *) &inputChar), sizeof(unsigned char));
-    } else if (input <= USHRT_MAX) {
-        unsigned short inputShort = input;
+    } else if (num <= USHRT_MAX) {
+        unsigned short inputShort = num;
         printAsBin(((unsigned long *) &inputShort), sizeof(unsigned short));
-    } else if (input <= UINT_MAX) {
-        unsigned int inputInt = input;
+    } else if (num <= UINT_MAX) {
+        unsigned int inputInt = num;
         printAsBin(((unsigned long *) &inputInt), sizeof(unsigned int));
     } else {
-        printAsBin(&input, sizeof(unsigned long));
+        printAsBin(&num, sizeof(unsigned long));
     }
 
     return 0;
 }
 
 // defines function which reads a number in range from sdin
-char getNumber(unsigned long *output) {
-
-    char inputStr[30];   // reserves char array used to temporarily store the string the user enters
-    fgets(inputStr, sizeof(inputStr), stdin);   // reads a string from stdin with
-
+char getNumber(char *inputStr, unsigned long *output) {
     char *endptr;   // defines pointer wich will point to where the first argument stopped parsing
     *output = strtoul(inputStr, &endptr, 10);   // gets long version of first argument
-    if (*output == ULLONG_MAX)
-        return 0;
 
     // if the number is valid
-    return *endptr == '\n';
+    return *endptr == '\n' || *endptr == '\0';
 }
 
 void printAsBin(unsigned long *input, const unsigned char size) {
