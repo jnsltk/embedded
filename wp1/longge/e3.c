@@ -6,6 +6,22 @@
 #define MAX_DIGIT   12
 #define HIGHEST_NUM 100
 
+void get_guess(int *pguess);
+void play_round();
+
+int main(int argc, char **argv) {
+    srand(time(0));
+
+    int c;
+    do {
+        play_round();
+
+        puts("Would you like to play again? [Y/n]");
+    } while (((c = getchar()) == 'y' || c == 'Y') && getchar() == '\n');
+
+    return 0;
+}
+
 void get_guess(int *pguess) {
     char *input_buff = malloc(sizeof(char) * MAX_DIGIT);
     memset(input_buff, 0, MAX_DIGIT);
@@ -50,15 +66,3 @@ void play_round() {
     printf("You win! The number I thought of was indeed %d!\n", n);
 }
 
-int main(int argc, char **argv) {
-    srand(time(0));
-
-    int c;
-    do {
-        play_round();
-
-        puts("Would you like to play again? [Y/n]");
-    } while (((c = getchar()) == 'y' || c == 'Y') && getchar() == '\n');
-
-    return 0;
-}
