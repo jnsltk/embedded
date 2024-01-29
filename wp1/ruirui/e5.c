@@ -1,3 +1,8 @@
+// (C) Henrik Lagrosen, Shiyao Xin, János Litkei, group: 35 (2024)
+// Work package 1
+// Exercise 5
+// Submission code:
+
 #include <stdio.h>    // includes standard I/O library
 #include <stdlib.h>   // includes library for strtoul
 #include <time.h>     // includes time header for time function
