@@ -1,3 +1,8 @@
+// (C) Henrik Lagrosen, Shiyao Xin, János Litkei, group: 35 (2024)
+// Work package 1
+// Exercise 1
+// Submission code:
+
 #include <stdio.h>   // includes standard I/O library for scanf and printf
 
 // defines macro s0

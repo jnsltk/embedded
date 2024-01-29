@@ -1,3 +1,8 @@
+// (C) Henrik Lagrosen, Shiyao Xin, János Litkei, group: 35 (2024)
+// Work package 1
+// Exercise 3
+// Submission code:
+
 #include <stdio.h>    // includes I/O library for getChar, printf, fgets
 #include <stdlib.h>   // includes stdlib for strtol
 #include <time.h>     // includes time header for time function
