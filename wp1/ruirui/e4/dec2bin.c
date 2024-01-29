@@ -73,7 +73,7 @@ void printAsBin(unsigned long *input, const unsigned char size) {
         // essentially gets the currently most significant bit of n
         const unsigned char bit = (*input & filter) != 0UL;
 
-        putchar(bit);   // prints the bit
+        printf("%hhu", bit);
         *input <<= 1;   // shift n one step to the left
     }
 

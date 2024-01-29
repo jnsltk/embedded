@@ -43,7 +43,7 @@ int main(const int argc, char **argv) {
         }
     }
 
-    printf("\n");
+    putchar('\n');   // prints newline
 
     if (i == 0)
         return 0;   // exits program

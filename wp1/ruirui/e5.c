@@ -119,9 +119,9 @@ void draw_histogram(int *freq) {
                 printf("%d   ", i);
 
             for (int x = 0; x < num; x++)   // for every time the number occured
-                printf("x");
+                putchar('x');               // prints an x
 
-            printf("\n");
+            putchar('\n');   // prints newline
         }
     }
 }
