@@ -48,6 +48,7 @@ int get_shift_no(unsigned long int n) {
     int min_bits = (int) log2(n) + 1;
 
     int i = 8;
+    // min_bits / 8  if it has remainder then + 1 *8
     while (i < min_bits) {
         i *= 2;
     }
