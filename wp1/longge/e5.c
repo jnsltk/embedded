@@ -44,12 +44,11 @@ void draw_histogram(int *freq) {
             printf("%d: ", i);
         }
         for (int j = 0; j < freq[i]; j++) {
-            putchar('+');
+            putchar('x');
         }
         putchar('\n');
     }
 }
-
 
 // ------ Main --------------------------
 // The main entry point for the program
