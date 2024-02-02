@@ -32,6 +32,9 @@ void write_file(PERSON *inrecord, char *mode);   // appends a new person to the 
 void print_person(PERSON *person);
 void read_str(char *output, unsigned char s);
 void search_menu();
+void search_by_firstname(char *name);
+void search_by_lastname(char *name);
+char get_one_char();
 
 // Creates a file and write the first record
 void write_new_file(PERSON *inrecord);
@@ -47,11 +50,8 @@ int main(void) {
 
     printf(MENU);
 
-    while ((c = getchar()) != '5') {
-
+    while ((c = get_one_char()) != '5') {
         switch (c) {
-            case '\n':
-                break;
             case '1':
                 strcpy(ppost.firstname, "Fornamn");
                 strcpy(ppost.famname, "Efternamn");
@@ -74,17 +74,58 @@ int main(void) {
                 break;
         }
 
-        if (c != '\n')
-            printf(MENU);
+        printf(MENU);
     }
 
     return (0);
 }
 
-PERSON input_record(void) {
-    while (getchar() != '\n')
-        ;
+/* --------------------- FILE OPERATIONS -------------------- */
 
+void write_new_file(PERSON *inrecord) {
+    write_file(inrecord, "wb");
+}
+
+void append_file(PERSON *inrecord) {
+    write_file(inrecord, "ab");
+}
+
+void write_file(PERSON *inrecord, char *mode) {
+    FILE *file = fopen(FILE_NAME, mode);
+    if (file == NULL) {
+        fprintf(stderr, "Failed to open file");
+        return;
+    }
+
+    if (fwrite(inrecord, sizeof(PERSON), 1, file) != 1)
+        fprintf(stderr, "Failed to write to file");
+
+    fclose(file);
+}
+
+void printfile(void) {
+    PERSON person;
+    unsigned char results = 0;
+
+    FILE *file = fopen(FILE_NAME, "rb");
+    if (file == NULL) {
+        fprintf(stderr, "Failed to open file\n");
+        return;
+    }
+
+    while (fread(&person, sizeof(PERSON), 1, file) != 0) {
+        print_person(&person);
+        results++;
+    }
+
+    printf("\n ----- Found %hhu results -----\n", results);
+
+    fclose(file);
+}
+
+/* --------------------- READ FROM STDIN -------------------- */
+
+PERSON input_record(void) {
     PERSON person;
 
     printf("Enter firstname: ");
@@ -115,85 +156,80 @@ void read_str(char *output, unsigned char s) {
     *output = '\0';
 }
 
-void write_new_file(PERSON *inrecord) {
-    write_file(inrecord, "wb");
+char get_one_char() {
+    char c = getchar();
+
+    if (c == '\n')
+        return '\n';
+
+    while (getchar() != '\n')
+        ;
+
+    return c;
 }
-
-void append_file(PERSON *inrecord) {
-    write_file(inrecord, "ab");
-}
-
-void write_file(PERSON *inrecord, char *mode) {
-    FILE *file = fopen(FILE_NAME, mode);
-    if (file == NULL) {
-        fprintf(stderr, "Failed to open file");
-        return;
-    }
-
-    if (fwrite(inrecord, sizeof(PERSON), 1, file) != 1)
-        fprintf(stderr, "Failed to write to file");
-
-    fclose(file);
-}
-
-void printfile(void) {
-    PERSON person;
-
-    FILE *file = fopen(FILE_NAME, "rb");
-    if (file == NULL) {
-        fprintf(stderr, "Failed to open file\n");
-        return;
-    }
-
-    while (fread(&person, sizeof(PERSON), 1, file) != 0)
-        print_person(&person);
-
-    fclose(file);
-}
+/* ------------------------- SEARCH ------------------------- */
 
 void search_menu() {
     char name[NAME_SIZE];
+    char c;
     size_t offset;
 
-    while (getchar() != '\n')
-        ;
-
     printf("Search for (f)irst name or (l)ast name?: ");
-
-    if (getchar() == 'l')
-        offset = offsetof(PERSON, famname);
-    else
-        offset = offsetof(PERSON, firstname);
-
-    while (getchar() != '\n')
-        ;
+    c = get_one_char();
 
     printf("Enter name to search for:");
     read_str(name, NAME_SIZE);
+
+    switch (c) {
+        case 'f':
+            search_by_firstname(name);
+            break;
+        case 'l':
+            search_by_lastname(name);
+            break;
+        default:
+            printf("Invalid alternative\n");
+            return search_menu();
+    }
+
+    search(name, offset);
+}
+
+void search_by_firstname(char *name) {
+    const size_t offset = offsetof(PERSON, firstname);
+    search(name, offset);
+}
+
+void search_by_lastname(char *name) {
+    const size_t offset = offsetof(PERSON, famname);
     search(name, offset);
 }
 
 void search(char *name, size_t offset) {
     PERSON person;
+    unsigned char results = 0;
 
     FILE *file = fopen(FILE_NAME, "rb");
     if (file == NULL) {
         fprintf(stderr, "Failed to open file\n");
-
         return;
     }
 
     while (fread(&person, sizeof(PERSON), 1, file) != 0) {
         char *cPtr = (char *) &person + offset;
-        if (strcmp(cPtr, name) == 0) {
+        results++;
+        if (strcmp(cPtr, name) == 0)
             print_person(&person);
-        }
     }
+
+    printf("\n ----- Found %hhu results -----\n", results);
 
     fclose(file);
 }
 
+/* -------------------------- MISC -------------------------- */
+
 void print_person(PERSON *person) {
-    printf("------ PERSON ------\nfirstname: %s\nfamname: %s\npers_number: %s\n", person->firstname,
-           person->famname, person->pers_number);
+    printf(" ------ PERSON ------ \nfirstname: %s\nfamname: %s\npers_number: %s\n",
+           person->firstname, person->famname, person->pers_number);
 }
