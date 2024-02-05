@@ -5,7 +5,7 @@
 // #### Constants #####
 #define MAX           5
 #define NUMBER        10
-#define ADD_FIRST_AMT 4
+#define ADD_FIRST_AMT 250
 
 // ##### typedefs          ####
 typedef struct q {
