@@ -1,7 +1,7 @@
 // (C) Henrik Lagrosen, Shiyao Xin, János Litkei, group: 35 (2024)
 // Work package 1
 // Exercise 2
-// Submission code:
+// Submission code: 35128211
 
 #include <stdio.h>    // includes I/O library for getChar, putChar
 #include <stdlib.h>   // includes stdlib for strtol
