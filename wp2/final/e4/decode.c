@@ -67,25 +67,23 @@ int main(int argc, char **argv) {
 
     engine_on = (num >> 7) & (mask);   // right shift 7 bits, and retrieve the value of engine_on
                                        //
-    if (engine_on < 0 || engine_on > 1) {
+    if (engine_on < 0 || engine_on > 1) {   // check engine_on value is within the required range
         printf("Invalid input\n");
-        return 2;
-    } else if (gear_pos < 0 || gear_pos > 4) {
+        return 2;                                // terminate the program if it is out of range
+    } else if (gear_pos < 0 || gear_pos > 4) {   // check gear_pos value is within the required
+                                                 // range
         printf("Invalid input\n");
-        return 2;
-    } else if (key_pos < 0 || key_pos > 2) {
+        return 2;                              // terminate the program if it is out of range
+    } else if (key_pos < 0 || key_pos > 2) {   // check key_pos value is within the required range
         printf("Invalid input\n");
-        return 2;
-    } else if (brake1 < 0 || brake1 > 1) {
+        return 2;                            // terminate the program if it is out of range
+    } else if (brake1 < 0 || brake1 > 1) {   // check brake1 value is within the required range
         printf("Invalid input\n");
-        return 2;
-    } else if (brake2 < 0 || brake2 > 1) {
+        return 2;                            // terminate the program if it is out of range
+    } else if (brake2 < 0 || brake2 > 1) {   // check brake2 value is within the required range
         printf("Invalid input\n");
-        return 2;
+        return 2;   // terminate the program if it is out of range
     }
-
-
-
 
     printf("%s\t\t%s\n", "Name", "Value");
     printf("%s\n", "-------------------------");
@@ -118,7 +116,7 @@ int validate_input(char *input) {
                 num = (int) (*c - '0');   // retrieve its integer value
             } else if (*c >= 'A' &&
                        *c <= 'F') {   // check if the current char value is between 'A' and 'F'
-                num = *c - 65;        // retrieve its integer value
+                num = *c - 55;        // retrieve its integer value
             }
             // check the gear_pos range is max 4 -> 100
             unsigned char mask =

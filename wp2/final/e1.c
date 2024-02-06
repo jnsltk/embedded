@@ -30,8 +30,6 @@ int validate_num(char *input, int *num);
 /* -------------------------- Main program section -------------------------- */
 // Main function
 int main(int argc, char **argv) {
-    int x_cord;           // define a variable to store x coordinate
-    int y_cord;           // define a variable to store y coordinate
     char commands[20];    // define a string of characters 'm' and 't' to move or turn the robot
     ROBOT robot;          // define one struct ROBOT variable
     ROBOT *robot_ptr;     // define a pointer to a struct ROBOT

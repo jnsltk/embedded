@@ -1,7 +1,7 @@
 // (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
 // Work package 0
 // Exercise 1
-// Submission code: xxxxx
+// Submission code: 333555
 
 /* ----------------------------- Include section ---------------------------- */
 #include <math.h>
@@ -98,7 +98,7 @@ int validate_input(char *input) {
                 num = (int) (*c - '0');   // retrieve its integer value
             } else if (*c >= 'A' &&
                        *c <= 'F') {   // check if the current char value is between 'A' and 'F'
-                num = *c - 65;        // retrieve its integer value
+                num = *c - 55;        // retrieve its integer value
             }
             // check the gear_pos range is max 4 -> 100
             unsigned char mask =
@@ -107,6 +107,22 @@ int validate_input(char *input) {
                 if ((((mask >> 1) & num) == 2) ||
                     (((mask >> 2) & num) == 1)) {   // if the number is invalid with 0110 || 0111
                     return 0;                       // return 0 (false)
+                }
+            }
+        } else if (count == 2) {   // when count is 2, that means it is the second char in the input
+            int num;
+            if (*c >= '0' &&
+                *c <= '9') {              // check if the current char value is between '0' and '9'
+                num = (int) (*c - '0');   // retrieve its integer value
+            } else if (*c >= 'A' &&
+                       *c <= 'F') {   // check if the current char value is between 'A' and 'F'
+                num = *c - 55;        // retrieve its integer value
+            }
+            unsigned char mask =
+                1 << 3;                // define a variable mask left shifted by 3 for bit operation
+            if ((num & mask) == 8) {   // check if the number is 8 with bit operation, i.e., 1000
+                if (((mask >> 1) & num) == 4) {   // if the number is invalid with 1100
+                    return 0;                     // return 0 (false)
                 }
             }
         }
