@@ -66,6 +66,26 @@ int main(int argc, char **argv) {
     }
 
     engine_on = (num >> 7) & (mask);   // right shift 7 bits, and retrieve the value of engine_on
+                                       //
+    if (engine_on < 0 || engine_on > 1) {
+        printf("Invalid input\n");
+        return 2;
+    } else if (gear_pos < 0 || gear_pos > 4) {
+        printf("Invalid input\n");
+        return 2;
+    } else if (key_pos < 0 || key_pos > 2) {
+        printf("Invalid input\n");
+        return 2;
+    } else if (brake1 < 0 || brake1 > 1) {
+        printf("Invalid input\n");
+        return 2;
+    } else if (brake2 < 0 || brake2 > 1) {
+        printf("Invalid input\n");
+        return 2;
+    }
+
+
+
 
     printf("%s\t\t%s\n", "Name", "Value");
     printf("%s\n", "-------------------------");
