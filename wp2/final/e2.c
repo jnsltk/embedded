@@ -63,8 +63,8 @@ int main(int argc, char *argv[]) {
 
 // Defines function to create a random list
 REGTYPE *random_list(void) {
-    int i = 0;                          // sets counter to 0
-    REGTYPE *old, *item, *top = NULL;   // declares pointers used when creating list
+    int i = 0;                                 // sets counter to 0
+    REGTYPE *old = NULL, *item, *top = NULL;   // declares pointers used when creating list
 
     old = malloc(sizeof(REGTYPE));   // allocates memory for the first node
 
@@ -75,8 +75,9 @@ REGTYPE *random_list(void) {
 
         item->prev = old;   // sets the previous node of the current node to the old node
 
-        old->next = item;   // sets the next node of the old node to the current node
-        old = item;         // sets the old node to the current node
+        if (old != NULL)
+            old->next = item;   // sets the next node of the old node to the current node
+        old = item;             // sets the old node to the current node
 
         if (top == NULL)   // if it is the first node
             top = old;     // sets the top node to the current node
