@@ -64,23 +64,22 @@ int main(int argc, char *argv[]) {
 // Defines function to create a random list
 REGTYPE *random_list(void) {
     int i = 0;                                 // sets counter to 0
-    REGTYPE *old = NULL, *item, *top = NULL;   // declares pointers used when creating list
-
-    old = malloc(sizeof(REGTYPE));   // allocates memory for the first node
+    REGTYPE *item, *old = NULL, *top = NULL;   // declares pointers used when creating list
 
     while (i < MAX) {                     // loop through the amount of nodes to create
         item = malloc(sizeof(REGTYPE));   // allocates memory for the current node
-        item->number =
-            rand() % (NUMBER + 1);   // sets the value of the current node to a random number
+
+        // sets the value of the current node to a random number
+        item->number = rand() % (NUMBER + 1);
 
         item->prev = old;   // sets the previous node of the current node to the old node
 
-        if (old != NULL)
+        if (old == NULL)        // if it is not the first node
+            top = item;         // sets the top node to the current node
+        else                    // if it is the first node
             old->next = item;   // sets the next node of the old node to the current node
-        old = item;             // sets the old node to the current node
 
-        if (top == NULL)   // if it is the first node
-            top = old;     // sets the top node to the current node
+        old = item;   // sets the old node to the current node
 
         i++;   // increments the counter of how many nodes have been created
     }
