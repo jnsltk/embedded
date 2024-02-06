@@ -1,3 +1,8 @@
+// (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
+// Work package 2
+// Exercise 2
+// Submission code: 555333
+
 #include <stdio.h>    // includes standard i/o library for putchar, getchar, printf, etc.
 #include <stdlib.h>   // includes standard library for malloc, free, etc.
 #include <time.h>     // includes time library for time function for random seed

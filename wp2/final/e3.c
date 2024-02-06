@@ -1,3 +1,8 @@
+// (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
+// Work package 2
+// Exercise 3
+// Submission code: 555333
+
 #include <stddef.h>   // includes standard definitions library for offsetof function
 #include <stdio.h>    // includes standard input output library for printf, getchar, putchar, etc.
 #include <stdlib.h>   // includes standard library for malloc, free

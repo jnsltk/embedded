@@ -1,7 +1,7 @@
 // (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
-// Work package 0
-// Exercise 1
-// Submission code: xxxxx
+// Work package 2
+// Exercise 4
+// Submission code: 555333
 
 /* ----------------------------- Include section ---------------------------- */
 #include <stdio.h>
