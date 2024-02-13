@@ -1,5 +1,8 @@
-// C++ code
-//
+// (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
+// Work package 0
+// Exercise 1
+// Submission code: 023513
+
 /* ------------------------------ Define macros ----------------------------- */
 #define TEMP         A0
 #define LIGHT_SENSOR A1

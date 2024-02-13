@@ -1,7 +1,7 @@
 // (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
 // Work package 0
 // Exercise 1
-// Submission code: xxxxx
+// Submission code: 023513
 
 /* ----------------------------- Include section ---------------------------- */
 #include <stdio.h>
@@ -31,14 +31,18 @@ int main() {
         array[i] = 0;   // initialize each element with 0
     }
     fill_array(array);
-    printf("The value of the address of the array (pointer) is: %p\n", &array);
-    // printf("%p\n", &nums);
-    printf("First integer in the array is (array[0]): %d\n", array[0]);
-    printf("The last integer in the array is: %d\n", array[MAX - 1]);
-    printf("The size of an integer (number of bytes) is: %lu\n", sizeof(int));
-    printf("The size of the whole array in bytes is: %lu\n", (sizeof(int) * MAX));
-    int i = 0;                  // define a counter
-    int *num = array;           // define a pointer to the array
+    printf("The value of the address of the array (pointer) is: %p\n",
+           &array);   // output the array pointer address
+    printf("First integer in the array is (array[0]): %d\n",
+           array[0]);   // output the first element in the array
+    printf("The last integer in the array is: %d\n",
+           array[MAX - 1]);   // output the last element in the array
+    printf("The size of an integer (number of bytes) is: %lu\n",
+           sizeof(int));   // output the the size of an integer
+    printf("The size of the whole array in bytes is: %lu\n",
+           (sizeof(int) * MAX));   // output the bytes of the array
+    int i = 0;                     // define a counter
+    int *num = array;              // define a pointer to the array
     while (*num && i < MAX) {   // loop the array via a pointer until the last element of the array
         printf("%d\t", *num);
         printf("%d\n", ((*num) * 2));
