@@ -4,15 +4,15 @@
 // Submission code: 023513
 
 /* ----------------------------- Include section ---------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include <stdio.h>    // Include standard input header file
+#include <stdlib.h>   // Include standard library header file
+#include <time.h>     // Include time.h library header file
 
 /* ------------------------------ Define macros ----------------------------- */
-#define MAX 5
+#define MAX 5   // define the maximum number used for the size of the array
 
 /* -------------------------- Function declaration -------------------------- */
-void fill_array(int *nums);
+void fill_array(int *nums);   // declare function to fill array
 
 /* -------------------------- Main program section -------------------------- */
 

@@ -4,11 +4,11 @@
 // Submission code: 023513
 
 /* ------------------------------ Define macros ----------------------------- */
-#define TEMP         A0
-#define LIGHT_SENSOR A1
-#define YELLOWLED    2
-#define REDLED       3
-#define GREENLED     4
+#define TEMP         A0   // defines temperature pin
+#define LIGHT_SENSOR A1   // defines light sensro pin
+#define YELLOWLED    2    // defines yellow led pin
+#define REDLED       3    // defines red led pin
+#define GREENLED     4    // dewfdines green led pin
 
 // defines setuo function which runs once when program start
 void setup() {
