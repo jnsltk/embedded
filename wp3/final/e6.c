@@ -1,3 +1,8 @@
+// (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
+// Work package 0
+// Exercise 1
+// Submission code: 023513
+
 #include <stdio.h>    // includes standard i/o library
 #include <string.h>   // includes string library for strcpy
 
