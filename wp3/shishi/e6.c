@@ -14,7 +14,7 @@ void copyString(char *copy_array, char *ori_array);
 /* -------------------------- Main program section -------------------------- */
 
 /**
- * This program eads in a string with a maximum of 20 characters from the keyboard and stores the
+ * This program reads in a string with a maximum of 20 characters from the keyboard and stores the
  * string in a local string variable.
  * The program should be able to both read in from keyboard or from a text file ‘myfile.txt’
  * containing one string of characters.
