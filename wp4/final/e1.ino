@@ -1,3 +1,8 @@
+// (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
+// Work package 4
+// Exercise 1
+// Submission code: 892561
+
 // Enum with interval in milliseconds
 enum Interval {
     I64 = (1 << CS11) | (1 << CS10),    // 64ms

@@ -1,12 +1,14 @@
 // (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
-// Work package 0
-// Exercise 1
-// Submission code:
+// Work package 4
+// Exercise 3
+// Submission code: 892561
 
 /* ----------------------------- Include section ---------------------------- */
-#include <Adafruit_NeoPixel.h>
+
+#include <Adafruit_NeoPixel.h> // include the Adafruit Neopixel library
 
 /* ----------------------------- Define section ----------------------------- */
+
 #define TEMP_SENSOR    A0            // define the pin of the temperature sensor
 #define NEO_PIN        6             // define the pin of the Neopixels ring
 #define NUMPIXELS      12            // define the number of pixels of the Neopixels ring
@@ -14,9 +16,11 @@
 #define RING_COL       (0, 0, 255)   // define the color
 
 /* -------------------------- Main program section -------------------------- */
+
 // define an NeoPixel object
 Adafruit_NeoPixel pixels(NUMPIXELS, NEO_PIN, NEO_GRB + NEO_KHZ800);
 
+// define the setup function which runs once
 void setup() {
     pinMode(RED_LED_BUZZER, OUTPUT);   // configure RED_LED_BUZZER as OUTPUT
     pixels.begin();                    // initialize the Neopixel pixels object
@@ -24,6 +28,7 @@ void setup() {
     Serial.begin(9600);                // start the serial communication
 }
 
+// define the loop function which runs repeatedly
 void loop() {
     readTemp();    // read the temperature periodically
     delay(1000);   // Wait for 1000 millisecond(s)

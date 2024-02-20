@@ -1,3 +1,8 @@
+// (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
+// Work package 4
+// Exercise 2
+// Submission code: 892561
+
 #include <Servo.h>   // includes servo library
 
 #define SEC_IN_MILL 1000   // defines amount of milliseconds in a second (used for testing)
