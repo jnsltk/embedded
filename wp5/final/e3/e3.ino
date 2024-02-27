@@ -1,20 +1,20 @@
 // (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
 // Work package 0
-// Exercise 1
-// Submission code: 023513
+// Exercise 3
+// Submission code: 662248
 
 /* ------------------------------ Define macros ----------------------------- */
-#include "dht_nonblocking.h"
-#define DHT_SENSOR_TYPE DHT_TYPE_11
-static const int DHT_SENSOR_PIN = 7;
-DHT_nonblocking dht_sensor( DHT_SENSOR_PIN, DHT_SENSOR_TYPE );
-//#define TEMP         A0   // defines temperature pin
-#define LIGHT_SENSOR A0   // defines light sensro pin
+#include "dht_nonblocking.h" // include DHT library for temp sensor
+#define DHT_SENSOR_TYPE DHT_TYPE_11 // Define dht sensor type
+static const int DHT_SENSOR_PIN = 7; // Define temp sensor pin
+DHT_nonblocking dht_sensor( DHT_SENSOR_PIN, DHT_SENSOR_TYPE ); // Create dht_sensor object from library
+#define LIGHT_SENSOR A0   // defines light sensor pin
 
 #define YELLOWLED    4    // defines yellow led pin
 #define GREENLED     5    // dewfdines green led pin
 #define REDLED       6    // defines red led pin
-//#define TEMP A0
+
+// Define temperature ranges
 #define TEMP_1 -12 // -12
 #define TEMP_2 0 // 0
 #define TEMP_3 1 // 1
@@ -29,19 +29,13 @@ void setup() {
   pinMode(GREENLED, OUTPUT);    // configure the green LED
   pinMode(YELLOWLED, OUTPUT);   // configure the yellow LED
   pinMode(REDLED, OUTPUT);      // configure the red LED
-  Serial.begin(9600);
-  Serial.println("horse");
+  Serial.begin(9600); // Initialize serial connection
 }
 
 // defines loop function which runs continuously
 void loop() {
-    //double tempValue = analogRead(TEMP);   // retrieve the value from temperature sensor
-    // map the read in values to the actual temperature values in farenheight
-    //double temperature = map(tempValue, 20, 358, -40, 125);
-
-    float temperature, humidity;
-    dht_sensor.measure( &temperature, &humidity );
-    //lightLed((int)temperature);
+    float temperature, humidity; // define variables for temperature and humidity
+    dht_sensor.measure( &temperature, &humidity ); // measure temperature and humidity
 
     // retrieve the value of the light sensor
     double lightValue = analogRead(LIGHT_SENSOR);
@@ -84,5 +78,4 @@ void indicate_led(double temperature, double lightIntensity) {
         digitalWrite(REDLED, LOW);       // turn off red
         digitalWrite(GREENLED, LOW);     // turn off green
     }
-
 }
