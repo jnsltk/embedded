@@ -1,3 +1,8 @@
+// (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
+// Work package 5
+// Exercise 2
+// Submission code: 662248
+
 /* ----------------------------- Include section ---------------------------- */
 #include "dht_nonblocking.h" // includes the dht_nonblocking library
 
