@@ -1,0 +1,17 @@
+[
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "/Users/jnsltk/Library/Arduino15/packages/arduino/hardware/renesas_uno/1.0.5/cores/arduino"
+  },
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "/Users/jnsltk/Library/Arduino15/packages/arduino/hardware/renesas_uno/1.0.5/variants/UNOWIFIR4"
+  },
+  {
+    "Sourcefile": "/Users/jnsltk/gu/embedded/embedded/wp5/longge/e1/build/sketch/e1.ino.cpp",
+    "Include": "",
+    "Includepath": null
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "additionalFiles": "",
+  "builtInToolsFolders": "",
+  "compiler.optimization_flags": "",
+  "customBuildProperties": "build.warn_data_percentage=75",
+  "fqbn": "arduino:renesas_uno:unor4wifi",
+  "hardwareFolders": "/Users/jnsltk/Library/Arduino15/packages",
+  "otherLibrariesFolders": "/Users/jnsltk/Documents/Arduino/libraries",
+  "sketchLocation": "/Users/jnsltk/gu/embedded/embedded/wp5/longge/e1"
+}
