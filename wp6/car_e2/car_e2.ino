@@ -1,6 +1,6 @@
 #include <Smartcar.h>
 
-const int carSpeed         = 30; // 80% of the max speed
+const int carSpeed         = 30; // 30% of the max speed
 const int GYROSCOPE_OFFSET = 37;
 
 ArduinoRuntime arduinoRuntime;
@@ -12,30 +12,13 @@ GY50 gyroscope(arduinoRuntime, GYROSCOPE_OFFSET);
 
 HeadingCar car(control, gyroscope);
 
-/**
-   Rotate the car on spot at the specified degrees with the certain speed
-   @param degrees   The degrees to rotate on spot. Positive values for clockwise
-                    negative for counter-clockwise.
-   @param speed     The speed to rotate
-*/
-void rotateOnSpot(int targetDegrees, int speed)
+void turn(int speed)
 {
-    // int speed = carSpeed;
-    speed = smartcarlib::utils::getAbsolute(speed);
-    targetDegrees %= 360; // put it on a (-360,360) scale
-    if (!targetDegrees)
-        return; // if the target degrees is 0, don't bother doing anything
-    /* Let's set opposite speed on each side of the car, so it rotates on spot */
-    if (targetDegrees > 0)
-    { // positive value means we should rotate clockwise
-        car.overrideMotorSpeed(speed,
-                               -1); // left motors spin forward, right motors spin backward
-    }
-    else
-    { // rotate counter clockwise
-        car.overrideMotorSpeed(-1,
-                               speed); // left motors spin backward, right motors spin forward
-    }
+    int targetDegrees = 180;
+    speed = smartcarlib::utils::getAbsolute(speed); // make sure speed is positive
+    car.overrideMotorSpeed(speed,
+            -1); // left motors spin forward, right motors spin backward
+
     const auto initialHeading = car.getHeading(); // the initial heading we'll use as offset to
                                                   // calculate the absolute displacement
     int degreesTurnedSoFar
@@ -44,13 +27,7 @@ void rotateOnSpot(int targetDegrees, int speed)
     { // while absolute displacement hasn't reached the (absolute) target, keep turning
         car.update(); // update to integrate the latest heading sensor readings
         auto currentHeading = car.getHeading(); // in the scale of 0 to 360
-        if ((targetDegrees < 0) && (currentHeading > initialHeading))
-        { // if we are turning left and the current heading is larger than the
-            // initial one (e.g. started at 10 degrees and now we are at 350), we need to substract
-            // 360, so to eventually get a signed
-            currentHeading -= 360; // displacement from the initial heading (-20)
-        }
-        else if ((targetDegrees > 0) && (currentHeading < initialHeading))
+        else if (currentHeading < initialHeading)
         { // if we are turning right and the heading is smaller than the
             // initial one (e.g. started at 350 degrees and now we are at 20), so to get a signed
             // displacement (+30)
@@ -68,13 +45,13 @@ void rotateOnSpot(int targetDegrees, int speed)
 void setup() {}
 
 void loop() {
-  rotateOnSpot(200, carSpeed); // rotate clockwise 90 degrees on spot
+  turn(180, carSpeed); // rotate clockwise 90 degrees on spot
 
   car.setSpeed(carSpeed);
   delay(1500);
   car.setSpeed(0);
 
-  rotateOnSpot(200, carSpeed);
+  turn(180, carSpeed);
 
   car.setSpeed(carSpeed);
   delay(1500);
