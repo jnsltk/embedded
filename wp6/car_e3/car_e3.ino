@@ -1,5 +1,5 @@
 /* ----------------------------- Include section ---------------------------- */
-#include <Smartcar.h>
+#include <Smartcar.h> // include the Smartcar library
 
 /* ----------------------------- Define section ----------------------------- */
 const int GYROSCOPE_OFFSET = 37;   // define offset 37
@@ -32,7 +32,7 @@ SR04 front(arduinoRuntime, TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);   // define the
 void setup() {
     pinMode(BUZZER, OUTPUT);   // configure BUZZER as OUTPUT
 
-    for(byte i = 0; i < 4; i++)
+    for(byte i = 0; i < 4; i++) // loops through LEDs
       pinMode(leds[i], OUTPUT);   // configure leds as OUTPUT
 }
 
@@ -47,7 +47,7 @@ void loop() {
 
     if (dist < 20) {       // check if the distance less than 20
         car.setSpeed(0);   // stop the car
-        annoying();
+        annoying(); // annoying sound and light
     } else {
         sound(dist);   // start a tone from the speaker shall indicate how close an object is
         light(dist);   // light up LEDs to indicate how close an object is to the vehicle
@@ -58,7 +58,7 @@ void loop() {
 
 // This function gets the distance between the car and the obstacle
 int getDistance() {
-    return front.getDistance();
+    return front.getDistance(); // return the distance from the obstacle
 }
 
 // This function start a tone to indicate how close an object is
@@ -71,7 +71,7 @@ void sound(int dist) {
 // This function turns on LEDs to indicate how close an object is to the vehicle
 void light(int dist) {
     // define an counter variable i and an index variable for leds
-    long i, vol = map(dist, 20, 150, 4, 0);
+    long i, vol = map(dist, 20, 150, 3, 0);
 
     for (i = 0; i < vol; i++)   // loop until the led index which should be on
         digitalWrite(leds[i], HIGH);   // turn on the leds
@@ -80,16 +80,17 @@ void light(int dist) {
         digitalWrite(leds[i], LOW);   // turn off the leds
 }
 
+// This function makes an annoying sound and light for when the car is too close to an obstacle
 void annoying() {
-  for(byte i = 0; i < 4; i++)
-    digitalWrite(leds[i], HIGH);
+  for(byte i = 0; i < 4; i++) // loops through LEDs
+    digitalWrite(leds[i], HIGH); // turn on the leds
 
-  analogWrite(BUZZER, vol);
-  delay(200);
+  analogWrite(BUZZER, 255); // put buzzer to max volume
+  delay(200); // delay for 200ms
 
-  for(byte i = 0; i < 4; i++)
-    digitalWrite(leds[i], LOW);
+  for(byte i = 0; i < 4; i++) // loops through LEDs
+    digitalWrite(leds[i], LOW); // turn off the leds
 
-  analogWrite(BUZZER, 0);
-  delay(200);
+  analogWrite(BUZZER, 0); // turn off the buzzer
+  delay(200); // delay for 200ms
 }
