@@ -31,10 +31,9 @@ SR04 front(arduinoRuntime, TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);   // define the
 // set up the configerations
 void setup() {
     pinMode(BUZZER, OUTPUT);   // configure BUZZER as OUTPUT
-    pinMode(2, OUTPUT);        // configure led at pin 2 as OUTPUT
-    pinMode(4, OUTPUT);        // configure led at pin 4 as OUTPUT
-    pinMode(23, OUTPUT);       // configure led at pin 23 as OUTPUT
-    pinMode(32, OUTPUT);       // configure led at pin 32 as OUTPUT
+
+    for(byte i = 0; i < 4; i++)
+      pinMode(leds[i], OUTPUT);   // configure leds as OUTPUT
 }
 
 // code that run in loop
@@ -48,10 +47,11 @@ void loop() {
 
     if (dist < 20) {       // check if the distance less than 20
         car.setSpeed(0);   // stop the car
+        annoying();
+    } else {
+        sound(dist);   // start a tone from the speaker shall indicate how close an object is
+        light(dist);   // light up LEDs to indicate how close an object is to the vehicle
     }
-
-    sound(dist);   // start a tone from the speaker shall indicate how close an object is
-    light(dist);   // light up LEDs to indicate how close an object is to the vehicle
 
     delay(50);   // delay for 50ms
 }
@@ -65,20 +65,31 @@ int getDistance() {
 void sound(int dist) {
     long vol =
         map(dist, 20, 150, 255, 0);   // get the sound volume based on the distance to the obstacle
-    if (vol <= 0) {                   // check if the volumn is less than or equal to 0
-        analogWrite(BUZZER, 0);       // no sound
-    } else {                          // otherwise
-        analogWrite(BUZZER, vol);     // sound the buzzer to the corresponding volumm
-    }
+    analogWrite(BUZZER, vol);     // sound the buzzer to the corresponding volumm
 }
 
 // This function turns on LEDs to indicate how close an object is to the vehicle
 void light(int dist) {
-    long i, vol = map(dist, 20, 150, 4,
-                      0);       // define an counter variable i and an index variable for leds
+    // define an counter variable i and an index variable for leds
+    long i, vol = map(dist, 20, 150, 4, 0);
+
     for (i = 0; i < vol; i++)   // loop until the led index which should be on
         digitalWrite(leds[i], HIGH);   // turn on the leds
 
     for (; i < 4; i++)                // loop from the led index which should be off
         digitalWrite(leds[i], LOW);   // turn off the leds
+}
+
+void annoying() {
+  for(byte i = 0; i < 4; i++)
+    digitalWrite(leds[i], HIGH);
+
+  analogWrite(BUZZER, vol);
+  delay(200);
+
+  for(byte i = 0; i < 4; i++)
+    digitalWrite(leds[i], LOW);
+
+  analogWrite(BUZZER, 0);
+  delay(200);
 }
