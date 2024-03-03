@@ -1,73 +1,84 @@
+/* ----------------------------- Include section ---------------------------- */
 #include <Smartcar.h>
-const int GYROSCOPE_OFFSET = 37;
 
-const int TRIGGER_PIN = 5; //D6
+/* ----------------------------- Define section ----------------------------- */
+const int GYROSCOPE_OFFSET = 37;   // define offset 37
 
-const int ECHO_PIN = 18; //D7
+const int TRIGGER_PIN = 5;   // define trigger pin
 
-const int BUZZER = 19;
+const int ECHO_PIN = 18;   // define echo pin
 
-const int leds[] = {
-    2,4,23,32
-};
+const int BUZZER = 19;   // define buzzer pin
 
-const unsigned int MAX_DISTANCE = 200;
+// define pins for leds
+const int leds[] = {2, 4, 23, 32};
 
-ArduinoRuntime arduinoRuntime;
-BrushedMotor leftMotor(arduinoRuntime, smartcarlib::pins::v2::leftMotorPins);
-BrushedMotor rightMotor(arduinoRuntime, smartcarlib::pins::v2::rightMotorPins);
-DifferentialControl control(leftMotor, rightMotor);
-GY50 gyroscope(arduinoRuntime, GYROSCOPE_OFFSET);
-HeadingCar car(control, gyroscope);
+const unsigned int MAX_DISTANCE = 200;   // define the MAX_DISTANCE
 
-int carSpeed = 30;
+ArduinoRuntime arduinoRuntime;   // declare an objdect of ArduinoRuntime
+BrushedMotor leftMotor(arduinoRuntime, smartcarlib::pins::v2::leftMotorPins);   // define leftMotor
+BrushedMotor rightMotor(arduinoRuntime,
+                        smartcarlib::pins::v2::rightMotorPins);   // define rightMotor
+DifferentialControl control(leftMotor, rightMotor);               // define control for motors
+GY50 gyroscope(arduinoRuntime, GYROSCOPE_OFFSET);                 // define gyroscope
+HeadingCar car(control, gyroscope);                               // define the object car
 
-SR04 front(arduinoRuntime, TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+int carSpeed = 30;   // define a variable to store car speed
 
+SR04 front(arduinoRuntime, TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);   // define the ultrasonic sensor
+
+/* -------------------------- Main program sectioin ------------------------- */
+// set up the configerations
 void setup() {
-  Serial.begin(9600);
-
-  pinMode(BUZZER, OUTPUT);
-
-  pinMode(2, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(23, OUTPUT);
-  pinMode(32, OUTPUT);
+    pinMode(BUZZER, OUTPUT);   // configure BUZZER as OUTPUT
+    pinMode(2, OUTPUT);        // configure led at pin 2 as OUTPUT
+    pinMode(4, OUTPUT);        // configure led at pin 4 as OUTPUT
+    pinMode(23, OUTPUT);       // configure led at pin 23 as OUTPUT
+    pinMode(32, OUTPUT);       // configure led at pin 32 as OUTPUT
 }
 
+// code that run in loop
 void loop() {
-  int dist = getDistance();
-  if (dist < 150) {
-    car.setSpeed(-(map(dist, 20, 150, 10, carSpeed)));
-  }
-  
-  if (dist < 20) {
-    car.setSpeed(0);
-  }
+    int dist = getDistance();   // retrieve the distance from the obstacle
+    if (dist < 150) {           // check if the distance less than 150
+        car.setSpeed(-(
+            map(dist, 20, 150, 10, carSpeed)));   // set the car speed which is gradually decreased
+                                                  // based on the distance to the obstacle
+    }
 
-  sound(dist);
-  light(dist);
+    if (dist < 20) {       // check if the distance less than 20
+        car.setSpeed(0);   // stop the car
+    }
 
-  delay(50);
-}    
+    sound(dist);   // start a tone from the speaker shall indicate how close an object is
+    light(dist);   // light up LEDs to indicate how close an object is to the vehicle
 
-int getDistance() { return front.getDistance(); }
-
-void sound(int dist) {
-  long vol = map(dist, 20, 150, 255, 0);
-  if (vol <= 0) {
-    analogWrite(BUZZER, 0);
-  } else  {
-    analogWrite(BUZZER, vol);
-  }
+    delay(50);   // delay for 50ms
 }
 
+// This function gets the distance between the car and the obstacle
+int getDistance() {
+    return front.getDistance();
+}
+
+// This function start a tone to indicate how close an object is
+void sound(int dist) {
+    long vol =
+        map(dist, 20, 150, 255, 0);   // get the sound volume based on the distance to the obstacle
+    if (vol <= 0) {                   // check if the volumn is less than or equal to 0
+        analogWrite(BUZZER, 0);       // no sound
+    } else {                          // otherwise
+        analogWrite(BUZZER, vol);     // sound the buzzer to the corresponding volumm
+    }
+}
+
+// This function turns on LEDs to indicate how close an object is to the vehicle
 void light(int dist) {
-  long i, vol = map(dist, 20, 150, 4, 0);
-  for(i = 0; i < vol; i++)
-    digitalWrite(leds[i], HIGH);
+    long i, vol = map(dist, 20, 150, 4,
+                      0);       // define an counter variable i and an index variable for leds
+    for (i = 0; i < vol; i++)   // loop until the led index which should be on
+        digitalWrite(leds[i], HIGH);   // turn on the leds
 
-  for(; i < 4; i++)
-    digitalWrite(leds[i], LOW);
-
+    for (; i < 4; i++)                // loop from the led index which should be off
+        digitalWrite(leds[i], LOW);   // turn off the leds
 }
