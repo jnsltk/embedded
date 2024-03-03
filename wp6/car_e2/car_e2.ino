@@ -27,7 +27,7 @@ void turn(int speed)
     { // while absolute displacement hasn't reached the (absolute) target, keep turning
         car.update(); // update to integrate the latest heading sensor readings
         auto currentHeading = car.getHeading(); // in the scale of 0 to 360
-        else if (currentHeading < initialHeading)
+        if (currentHeading < initialHeading)
         { // if we are turning right and the heading is smaller than the
             // initial one (e.g. started at 350 degrees and now we are at 20), so to get a signed
             // displacement (+30)
@@ -45,13 +45,13 @@ void turn(int speed)
 void setup() {}
 
 void loop() {
-  turn(180, carSpeed); // rotate clockwise 90 degrees on spot
+  turn(carSpeed); // rotate clockwise 90 degrees on spot
 
   car.setSpeed(carSpeed);
   delay(1500);
   car.setSpeed(0);
 
-  turn(180, carSpeed);
+  turn(carSpeed);
 
   car.setSpeed(carSpeed);
   delay(1500);
