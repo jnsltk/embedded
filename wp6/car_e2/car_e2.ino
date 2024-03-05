@@ -3,6 +3,16 @@
 // Exercise 2
 // Submission code: 61L1GA
 
+/*
+The setup function does nothing, all setup is in the constructors of the different classes which comes with the Smartcar.h library.
+It sets up the left and right motors, differential control, gyroscope and the car object.
+The loop turns the car 180 degrees, then goes forward for 1.5 seconds, then stops the car. 
+It will repeat to make an oval shape as a result.
+The turn function takes a speed parameter, sets the left motors to the speed, the other motors to -1 speed, ensuring that those wheels will be 
+locked, enabling it to turn. It uses to car.getHeading() function which uses the gyroscope, to know when it has turned 180 degrees.
+When it has turned 180 degrees, it will stop, so it is ready to start driving straight.
+*/
+
 #include <Smartcar.h> // include the Smartcar library
 
 const int carSpeed         = 30; // 30% of the max speed
