@@ -1,3 +1,8 @@
+// (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
+// Work package 6
+// Exercise 3
+// Submission code: 61L1GA
+
 /* ----------------------------- Include section ---------------------------- */
 #include <Smartcar.h> // include the Smartcar library
 

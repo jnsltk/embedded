@@ -1,3 +1,8 @@
+// (C) Henrik Lagrosen, János Litkei, Shiyao Xin; Group 35 (2024)
+// Work package 6
+// Exercise 2
+// Submission code: 61L1GA
+
 #include <Smartcar.h> // include the Smartcar library
 
 const int carSpeed         = 30; // 30% of the max speed
