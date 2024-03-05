@@ -3,6 +3,30 @@
 // Exercise 3
 // Submission code: 61L1GA
 
+/* ------------------------------Program Explanation------------------------- */
+/*
+The parking radar function uses the ultrasonic sensor to reverse the car 
+towards a wall, gradually slowing it down while also providing audiovisual 
+feedback using four LEDs and a buzzer.
+
+First, the distance is measured at the beginning of every loop iteration. Then, 
+if the distance is shorter than a set threshold, then we map it to the speed of
+the car, causing it to slow down as it gets closer to the target wall.
+
+If the distance has reached a set target, the car is stopped, and we turn on 
+"annoying" mode, which just blinks the LEDs and beeps the buzzer continuously to
+signal that the car has reached the target.
+
+If the distance hasn't been reached yet, the sound() and light() functions are 
+called, which gradually increase the volume of the buzzer, and light up more and
+more LEDs based on the distance respectively.
+
+For measuring the distance we use the getDistance() function, which is a wrapper
+around the library for the SR04 ultrasonic sensor. It works by sending out an
+ultrasound signal using the Trigger pin, and listening for the echo on the Echo
+pin. The time difference can be used to calculate the distance.
+*/
+
 /* ----------------------------- Include section ---------------------------- */
 #include <Smartcar.h> // include the Smartcar library
 
